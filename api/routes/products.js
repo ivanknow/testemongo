@@ -8,8 +8,15 @@ router.get('/',(req,res,next)=>{
 });
 
 router.post('/',(req,res,next)=>{
-    res.status(200).json({
-        message:"POST works"
+    
+    console.log("req",req.body);
+    let product = {
+        name:req.body.name,
+        price:req.body.price
+    };
+    res.status(201).json({
+        message:"Success",
+        createdProduct:product  
     })
 });
 
