@@ -12,6 +12,16 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
+app.use((req,res,next)=>{
+    res.header("Access-Control-Allow-Origin","*");
+    res.header("Access-Control-Allow-Headers","*");
+    if(req.method === 'OPTIONS'){
+        res.header("Access-Control-Allow-Methods","PATCH,GET,DELETE,PUT,POST");
+        return res.status(200).json({});
+    }
+    next();
+});
+
 app.use("/product",productRoutes);
 
 app.use("/order",orderRoutes);
